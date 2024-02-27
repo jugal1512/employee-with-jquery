@@ -1,0 +1,192 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Employee</title>
+        <script src="/jquery.js"></script>
+        <script src="/pagination.js"></script>
+        <script src="./pagination.min.js"></script>
+        <link rel="stylesheet" href="/pagination.css">
+        <link rel="stylesheet" href="employee.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="common.js"></script>
+        <script src="employee.js"></script>
+        <script src="localstorage.js"></script>
+        <script src="validation.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-light bg-primary">
+            <div class="container-fluid">
+            <a class="navbar-brand text-white">Employee</a>
+            <form class="d-flex input-group w-auto">
+                <input type="text" id="inputSearch" class="insearch border-0"/>
+                <button type="button" id="btnsearch" class="btn me-3">
+                    <i class="fa-solid fa-magnifying-glass" style="color: #f0f2f5;"></i>
+                </button>
+                <button type="button" id="addEmployee" class="bg-white p-2 border-0">
+                    <i class="fa-solid fa-circle-plus"></i> Add New Employee
+            </button>
+            <div class="modal modal-lg" tabindex="-1" id="myModal">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title">Add Employee</h5>
+                    <button type="button" class="btn-close closeModal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" id="employeeForm">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="row g-3">
+                                        <div class="col-3">
+                                            <label for="txtFirstName">First Name</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <input type="hidden" id="hiddenId">
+                                            <input type="text" id="txtFirstName" name="txtFirstName" class="nt-required" errorMessage="Enter First Name!">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row g-3">
+                                        <div class="col-3">
+                                            <label for="txtLastName">Last Name</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <input type="text" id="txtLastName" name="txtLastName" class="nt-required" errorMessage="Enter Last Name!">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-3 mt-2">
+                                <div class="col-md-6">
+                                    <div class="row g-3">
+                                        <div class="col-3">
+                                            <label for="txtEmail">Email</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <input type="email" id="txtEmail" name="txtEmail" class="nt-required nt-valid" errorMessage="Enter Email!" validEmail="invalid Email!">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row g-3">
+                                        <div class="col-3">
+                                        <label for="">Gender</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="radio" id="rbtGenderMale" name="gender" value="Male" checked>Male
+                                        <input type="radio" id="rbtGenderFemale" name="gender" value="FeMale">FeMale
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-3 mt-2">
+                                <div class="col-md-6">
+                                    <div class="row g-3">
+                                        <div class="col-3">
+                                            <label for="dpDob">DOB</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <input type="date" name="dpdob" id="dpDob" class="nt-required" errorMessage="Enter Date of Birth!">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row g-3">
+                                        <div class="col-3">
+                                            <label for="dpJoinDate">Joining Date</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <input type="date" name="dpjoindate" id="dpJoinDate" class="nt-required" errorMessage="Enter Joining Date!">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-3 mt-2">
+                                <div class="col-md-6">
+                                    <div class="row g-3">
+                                        <div class="col-3">
+                                            <label for="drpDesignation">Designation</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <select type="select" name="drpdesignation" id="drpDesignation" class="nt-required" errorMessage="Select Designation!">
+                                                <option value="" selected>Select</option>
+                                                <option value="Jr.Developer">Jr.Developer</option>
+                                                <option value="Sr.Developer">Sr.Developer</option>
+                                                <option value="Project Manager">Project Manager</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row g-3">
+                                        <div class="col-3">
+                                        </div>
+                                        <div class="col-9">
+                                            <input type="file" name="fileUpload" id="fProfileImage" class="nt-required" errorMessage="Select Image!">
+                                            <img id="imgUploadImage" src="#" alt="Profile photo" height="300px" width="200px">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-3 mt-2">
+                                <div class="col-md-6">
+                                    <div class="row g-3">
+                                        <div class="col-3">
+                                            <label for="dlSkill">Skill</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <input type="text" name="skill" id="txtSkill">
+                                            <button type="button" id="btnAdd" class="p-2">Add</button>
+                                            <ul id="skillAdded">
+                                                
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row g-3">
+                                        <div class="col-3">
+                                            <label for="txtDescription">Description</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <textarea type="text" name="txtdescription" id="txtDescription" cols="20" rows="5" class="nt-required" errorMessage="Enter Description!"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="btnSave" type="button" class="btn btn-primary">Save</button>
+                            <button type="button" class="btn border-dark closeModal p-2">Close</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </nav>
+        <table class="table text-center" id="tblEmployee">
+            <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Designation</th>
+                <th>Gender</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody id="employeeData">
+                
+            </tbody>
+        </table>
+        <div id="paginationTable"></div>
+    </body>
+    </html>

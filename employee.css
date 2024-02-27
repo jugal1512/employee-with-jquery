@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.profileImage {
+    transition: transform .2s;
+}
+
+.profileImage:hover{
+    transform: scale(1.5);
+}
+
+#skillAdded{
+    padding-left: 1px;
+    width: 180px;
+    float: left;
+}
+
+li{
+    list-style: none;
+    position: relative;
+    color: black;
+    font-size: 19px;
+    text-align: left;
+}
+
+li i{
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    top: 10px;
+}
+
+#paginationTable{
+    float: right;
+    margin-right: 50px;
+}
+
+.validateError {
+    color: red;
+    font-size: 16px;
+    margin-top: 5px;
+    display: block;
+}
+
+
+
+
